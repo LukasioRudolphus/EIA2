@@ -4,6 +4,7 @@ var ZufallsGedicht;
     let subjekt = ["Gunther", "Die fette Katze", "Das Handball-Team", "Der Hausmeister", "Das Paar"];
     let prädikat = [" beißt ", " jagt ", " baut ", " springt auf ", " trägt "];
     let objekt = ["die Tastatur.", "den Hund.", "das Schwimmbecken.", "das Dach.", "die Kiste."];
+    debugger;
     for (let i = 5; i >= 1; i--) {
         let word = getVerse(subjekt, prädikat, objekt);
         console.log(word);
