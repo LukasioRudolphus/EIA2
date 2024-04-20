@@ -2,6 +2,7 @@ html,
 body {
     height: 100%;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 html {
@@ -10,28 +11,32 @@ html {
 
 body {
     margin: 0;
-    background-color: navajowhite;
+    background-color: #0e103d;
     position: relative;
 }
 
 #userList {
-    width: 20%;
+    width: 30%;
     height: 90%;
-    background-color: blue;
     float: left;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 #list {
     width: 40%;
-    height: 90%;
-    background-color: whitesmoke;
+    min-height: 80%;
+    height: auto;
+    background-color: #f2d7ee;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 5%;
+    margin-top: 2%;
+    margin-bottom: 5%;
     display: inline-block;
     position: absolute;
+    border-radius: 16px;
+    padding-bottom: 5px;
 }
+
 
 h1 {
     padding: 40px 80px 40px 80px;
@@ -41,10 +46,15 @@ h1 {
 
 
 
+
 /* --------- Entry Box --------- */
 
 fieldset {
     padding-top: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
 }
 
 .itemName {
@@ -83,19 +93,98 @@ fieldset {
 
 .bought {
     float: right;
-    /* border-radius: 1.375rem; */
     height: 1.375rem;
     width: 1.375rem;
     margin: 0;
     margin-bottom: 0.64rem;
-    /* appearance: auto;
-    clip-path: circle(46% at 50% 50%); */
     border: none;
-    /* accent-color: rgb(42, 227, 42); */
 }
 
-.deleteEntry {}
+.deleteEntry {
+    color: grey;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    margin: 0;
+}
 
 .lastPurchase {
     float: right;
+    color: grey;
+    border: none;
+    border-radius: 0.15rem;
+}
+
+#newEntry {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    margin: 0;
+    border-radius: 16px;
+    float: right;
+    border: #0e103d solid 1px;
+    margin-right: 20px;
+    color: #0e103d;
+}
+
+.fa-plus {
+    font-size: 1.3rem;
+    margin-top: 1.6px;
+}
+
+
+
+
+/* --------- Profiles --------- */
+
+.persona {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.persona > img {
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    z-index: 4;
+}
+
+.name {
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: bold;
+    background-color: white;
+    color: #0e103d;
+    border-radius: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#newPerson {
+    border: #f2d7ee solid 2px;
+}
+
+.newPersona {
+    position: absolute;
+    top: 37%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-size: 2rem;
 }
