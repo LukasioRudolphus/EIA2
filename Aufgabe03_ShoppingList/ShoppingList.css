@@ -1,0 +1,101 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    background-color: navajowhite;
+    position: relative;
+}
+
+#userList {
+    width: 20%;
+    height: 90%;
+    background-color: blue;
+    float: left;
+    margin-top: 5%;
+}
+
+#list {
+    width: 40%;
+    height: 90%;
+    background-color: whitesmoke;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 5%;
+    display: inline-block;
+    position: absolute;
+}
+
+h1 {
+    padding: 40px 80px 40px 80px;
+    margin: 0;
+    text-align: center;
+}
+
+
+
+/* --------- Entry Box --------- */
+
+fieldset {
+    padding-top: 0;
+}
+
+.itemName {
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-top: 0.67rem;
+    margin-bottom: 0.77rem;
+}
+
+.amount {
+    float: right;
+    font-size: 1.15rem;
+    border-width: 0.125rem;
+    border-style: none;
+    border-radius: 0.35rem;
+    text-align: center;
+    width: 4.4rem;
+    box-sizing: border-box;
+    margin-top: 0.9rem;
+    margin-bottom: 0.64rem;
+}
+
+.comment {
+    font-size: 0.85rem;
+    margin-top: 0;
+    margin-bottom: 0.64rem;
+    height: 1rem;
+    width: 70%;
+    border-color: lightgrey;
+    resize: none;
+    border-radius: 0.15rem;
+    color: grey;
+    border-width: 1px;
+    padding: 2px;
+}
+
+.bought {
+    float: right;
+    /* border-radius: 1.375rem; */
+    height: 1.375rem;
+    width: 1.375rem;
+    margin: 0;
+    margin-bottom: 0.64rem;
+    /* appearance: auto;
+    clip-path: circle(46% at 50% 50%); */
+    border: none;
+    /* accent-color: rgb(42, 227, 42); */
+}
+
+.deleteEntry {}
+
+.lastPurchase {
+    float: right;
+}
