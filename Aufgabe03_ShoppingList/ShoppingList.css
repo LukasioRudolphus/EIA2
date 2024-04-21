@@ -24,7 +24,7 @@ body {
 
 #list {
     width: 40%;
-    min-height: 80%;
+    min-height: 40%;
     height: auto;
     background-color: #f2d7ee;
     left: 50%;
@@ -34,7 +34,7 @@ body {
     display: inline-block;
     position: absolute;
     border-radius: 16px;
-    padding-bottom: 5px;
+    padding-bottom: 42px;
 }
 
 
@@ -55,6 +55,7 @@ fieldset {
     margin-right: 10px;
     border-radius: 10px;
     margin-bottom: 5px;
+    border-color: #0e103d;
 }
 
 .itemName {
@@ -150,7 +151,7 @@ fieldset {
     z-index: 2;
 }
 
-.persona > img {
+.persona>img {
     height: 100%;
     width: 100%;
     border-radius: 100px;
@@ -188,3 +189,82 @@ fieldset {
     padding-right: 3px;
     font-size: 2rem;
 }
+
+
+
+
+
+/* --------- Media Querries --------- */
+
+@media (max-width: 768px) {
+
+    #list {
+        width: 96%;
+        position: relative;
+        left: 0;
+        margin-left: auto;
+        margin-right: auto;
+        transform: translateX(0);
+        display: block;
+        min-height: 10%;
+    }
+
+    #userList {
+        position: relative;
+        float: none;
+        width: 100%;
+        height: auto;
+        margin-bottom: 2%;
+    }
+
+    .persona {
+        display: inline-block;
+        margin-left: 75px;
+        margin-right: 0;
+    }
+
+}
+
+@media (max-width: 425px) {
+
+    h1 {
+        padding: 40px 40px 40px 40px;
+        margin: 0;
+        text-align: center;
+    }
+
+    .persona {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+}
+
+/* #list {
+    width: 40%;
+    min-height: 80%;
+    height: auto;
+    background-color: #f2d7ee;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 2%;
+    margin-bottom: 5%;
+    display: inline-block;
+    position: absolute;
+    border-radius: 16px;
+    padding-bottom: 5px;
+} */
+
+/* .persona {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    box-sizing: border-box;
+    z-index: 2;
+} */
