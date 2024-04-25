@@ -1,0 +1,272 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    background-color: #0e103d;
+    position: relative;
+}
+
+#userList {
+    width: 30%;
+    height: 90%;
+    float: left;
+    margin-top: 2%;
+}
+
+#list {
+    width: 40%;
+    min-height: 40%;
+    height: auto;
+    background-color: #f2d7ee;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 2%;
+    margin-bottom: 5%;
+    display: inline-block;
+    position: absolute;
+    border-radius: 16px;
+    padding-bottom: 42px;
+}
+
+
+h1 {
+    padding: 40px 80px 40px 80px;
+    margin: 0;
+    text-align: center;
+}
+
+button {
+    background-color: white;
+}
+
+
+/* --------- Entry Box --------- */
+
+fieldset {
+    padding-top: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    border-color: #0e103d;
+}
+
+.itemName {
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-top: 0.67rem;
+    margin-bottom: 0.77rem;
+}
+
+.amount {
+    float: right;
+    font-size: 1.15rem;
+    border-width: 0.125rem;
+    border-style: none;
+    border-radius: 0.35rem;
+    text-align: center;
+    width: 4.4rem;
+    box-sizing: border-box;
+    margin-top: 0.9rem;
+    margin-bottom: 0.64rem;
+}
+
+.comment {
+    font-size: 0.85rem;
+    margin-top: 0;
+    margin-bottom: 0.64rem;
+    height: 1rem;
+    width: 70%;
+    border-color: lightgrey;
+    resize: none;
+    border-radius: 0.15rem;
+    color: grey;
+    border-width: 1px;
+    padding: 2px;
+}
+
+.bought {
+    float: right;
+    height: 1.375rem;
+    width: 1.375rem;
+    margin: 0;
+    margin-bottom: 0.64rem;
+    border: none;
+}
+
+.deleteEntry {
+    color: grey;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.lastPurchase {
+    float: right;
+    color: grey;
+    border: none;
+    border-radius: 0.15rem;
+}
+
+#newEntry {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    margin: 0;
+    border-radius: 16px;
+    float: right;
+    border: #0e103d solid 1px;
+    margin-right: 20px;
+    color: #0e103d;
+}
+
+.fa-plus {
+    font-size: 1.3rem;
+    margin-top: 1.6px;
+}
+
+
+
+
+/* --------- Profiles --------- */
+
+.persona {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.persona>img {
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    z-index: 4;
+}
+
+.name {
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: bold;
+    background-color: white;
+    color: #0e103d;
+    border-radius: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#newPerson {
+    border: #f2d7ee solid 2px;
+}
+
+.newPersona {
+    position: absolute;
+    top: 37%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-size: 2rem;
+}
+
+
+
+
+
+/* --------- Media Querries --------- */
+
+@media (max-width: 768px) {
+
+    #list {
+        width: 96%;
+        position: relative;
+        left: 0;
+        margin-left: auto;
+        margin-right: auto;
+        transform: translateX(0);
+        display: block;
+        min-height: 10%;
+    }
+
+    #userList {
+        position: relative;
+        float: none;
+        width: 100%;
+        height: auto;
+        margin-bottom: 2%;
+    }
+
+    .persona {
+        display: inline-block;
+        margin-left: 75px;
+        margin-right: 0;
+    }
+
+}
+
+@media (max-width: 425px) {
+
+    h1 {
+        padding: 40px 40px 40px 40px;
+        margin: 0;
+        text-align: center;
+    }
+
+    .persona {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+}
+
+/* #list {
+    width: 40%;
+    min-height: 80%;
+    height: auto;
+    background-color: #f2d7ee;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 2%;
+    margin-bottom: 5%;
+    display: inline-block;
+    position: absolute;
+    border-radius: 16px;
+    padding-bottom: 5px;
+} */
+
+/* .persona {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    box-sizing: border-box;
+    z-index: 2;
+} */
