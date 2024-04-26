@@ -20,9 +20,12 @@ namespace shoppingList {
         }
         console.log(dataList);
         document.getElementById("newEntry")?.addEventListener("click", generateContent);
+        // document.getElementById("newEntry")?.addEventListener("click", generateContent(dataList[0]));
     }
 
-    function generateContent(_event: Event): void {
+    function generateContent(_arrayEntry: any): any {
+        let arrayEntry = dataList[0];
+
         let nthEntry: HTMLElement = document.createElement("fieldset");
         document.querySelector("#list")?.appendChild(nthEntry);
         nthEntry.setAttribute("class", "entry");
@@ -31,40 +34,76 @@ namespace shoppingList {
         let nthItemName: HTMLElement = document.createElement("h2");
         document.querySelector("#entry1")?.appendChild(nthItemName);
         nthItemName.setAttribute("class", "itemName");
+        nthItemName.innerHTML = arrayEntry["name"];
 
-        let nthAmount = document.createElement("input");
-        document.querySelector("#entry1")?.appendChild(nthAmount);
+        let nthAmount: HTMLInputElement = document.createElement("input");
         nthAmount.setAttribute("class", "amount");
-        nthItemName.setAttribute("name", "itemAmount");
+        nthAmount.setAttribute("name", "itemAmount");
+        nthAmount.setAttribute("id", "itemAmount1");
         nthAmount.type = "number";
+        document.querySelector("#entry1")?.appendChild(nthAmount);
+
+        nthEntry.innerHTML += "<br>";
 
         let nthComment: HTMLElement = document.createElement("textarea");
         document.querySelector("#entry1")?.appendChild(nthComment);
         nthComment.setAttribute("class", "comment");
+        nthComment.setAttribute("id", "comment1");
         nthComment.setAttribute("name", "commentarea");
         nthComment.setAttribute("cols", "30");
         nthComment.setAttribute("rows", "1");
+        nthComment.innerHTML = arrayEntry["comment"];
 
         let nthCheckboxBought = document.createElement("input");
         document.querySelector("#entry1")?.appendChild(nthCheckboxBought);
         nthCheckboxBought.setAttribute("class", "bought");
-        nthItemName.setAttribute("name", "wasBought");
+        nthCheckboxBought.setAttribute("name", "wasBought");
+        nthCheckboxBought.setAttribute("id", "wasBought1");
         nthCheckboxBought.type = "checkbox";
+        nthCheckboxBought.checked = arrayEntry["wasBought"];
+        console.log(nthCheckboxBought.checked);
+
+        nthEntry.innerHTML += "<br>";
 
         let nthDeleteButton: HTMLElement = document.createElement("button");
         document.querySelector("#entry1")?.appendChild(nthDeleteButton);
         nthDeleteButton.setAttribute("class", "deleteEntry");
+        nthDeleteButton.setAttribute("id", "deleteEntry1");
 
         let nthDeleteIcon = document.createElement("i");
-        document.querySelector(".deleteEntry")?.appendChild(nthDeleteIcon);
+        document.querySelector("#deleteEntry1")?.appendChild(nthDeleteIcon);
         nthDeleteIcon.setAttribute("class", "fa-solid fa-trash-can");
         
         let nthDateLastBought = document.createElement("input");
         document.querySelector("#entry1")?.appendChild(nthDateLastBought);
         nthDateLastBought.setAttribute("class", "lastPurchase");
-        nthItemName.setAttribute("name", "dateOfLastPurchase");
+        nthDateLastBought.setAttribute("id", "lastPurchase1");
+        nthDateLastBought.setAttribute("name", "dateOfLastPurchase");
+        nthDateLastBought.setAttribute("readonly", "");
         nthDateLastBought.type = "date";
+        nthDateLastBought.value = arrayEntry["lastBought"];
 
+        addValueAmount(arrayEntry["amount"]);
+        addCheckmark(arrayEntry["wasBought"]);
+        addDate(arrayEntry["lastBought"]);
+    }
+
+    function addValueAmount(amountEntry: any){
+        let valueAmount = document.getElementById("itemAmount1") as HTMLInputElement;
+        console.log(valueAmount);
+        valueAmount.value = amountEntry;
+    }
+
+    function addCheckmark(checkEntry: any){
+        let addMark = document.getElementById("wasBought1") as HTMLInputElement;
+        console.log(addMark);
+        addMark.checked = checkEntry;
+    }
+
+    function addDate(dateEntry: any){
+        let addLastDate = document.getElementById("lastPurchase1") as HTMLInputElement;
+        console.log(addLastDate);
+        addLastDate.value = dateEntry;
     }
 
     function logAmount(this: any): void {
