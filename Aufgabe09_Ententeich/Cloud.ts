@@ -12,7 +12,7 @@ namespace duckpond {
         }
 
         // Methode zum Bewegen des Objekts
-        move(_timeslice: number) {
+        move(_timeslice: number): Vector {
             let offset: Vector = new Vector(this.speed.x, 0);
             // Damit die Wolken wieder rechts ins Bild kommen, nachdem sie es links verlassen
             if (this.position.x > (crc2.canvas.width + 150)) {
