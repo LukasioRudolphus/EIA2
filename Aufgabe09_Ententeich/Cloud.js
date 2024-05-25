@@ -27,7 +27,6 @@ var duckpond;
         draw() {
             duckpond.crc2.save();
             duckpond.crc2.translate(this.position.x, this.position.y);
-            console.log("Cloud", this.position, this.size);
             let nParticles = 30;
             let radiusParticle = 40;
             let particle = new Path2D();

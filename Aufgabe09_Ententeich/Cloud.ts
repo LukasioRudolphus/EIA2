@@ -29,7 +29,6 @@ namespace duckpond {
         draw(): ImageData {
             crc2.save();
             crc2.translate(this.position.x, this.position.y);
-            console.log("Cloud", this.position, this.size);
     
             let nParticles: number = 30;
             let radiusParticle: number = 40;

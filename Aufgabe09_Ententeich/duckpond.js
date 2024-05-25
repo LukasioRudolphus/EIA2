@@ -35,7 +35,6 @@ var duckpond;
         // Erstellen der Wolke
         cloud1 = new duckpond.Cloud(150, 120, 200, 40);
         pCloud1 = cloud1.draw();
-        console.log(pCloud1);
         clouds.push(cloud1);
         // Funktion, die in einem regelmäßigen Intervall aufgerufen wird, um im Bild Bewegung zu simulieren
         window.setInterval(update, 20);
