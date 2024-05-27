@@ -4,12 +4,10 @@ namespace duckpond {
     export let crc2: CanvasRenderingContext2D;
 
     let ducks: Duck[] = [];
+    let ducksV2: DuckV2[] = [];
     let clouds: Cloud[] = [];
-
-    let bird1: Duck;
-    let bird2: Duck;
-    let bird3: Duck;
-    let bird4: Duck;
+    let bird: Duck;
+    let birdV2: DuckV2;
     let cloud1: Cloud;
     let pCloud1: ImageData;
 
@@ -24,22 +22,26 @@ namespace duckpond {
         // Zeichnen des Hintergrunds
         drawBackground();
 
-        // erstellen der Enten
-        bird1 = new Duck(0, -5);
-        ducks.push(bird1);
-        bird1.draw();
+        // erstellen der Enten im Teich
+        for (let i = 0; i < 10; i++) {
+            bird = new Duck(50, 50);
+            ducks.push(bird);
+            bird.draw();
+        }
 
-        bird2 = new Duck(140, 10);
-        ducks.push(bird2);
-        bird2.draw();
-    
-        bird3 = new Duck(100, 90);
-        ducks.push(bird3);
-        bird3.draw();
-    
-        bird4 = new Duck(-40, 80);
-        ducks.push(bird4);
-        bird4.draw();
+        // erstellen der Enten auf der Wiese
+        for (let i = 0; i < 10; i++) {
+            if (i % 2 == 0) {
+                birdV2 = new DuckV2(450, 150);
+                ducksV2.push(birdV2);
+                birdV2.draw();
+            } else {
+                birdV2 = new DuckV2(-410, 150);
+                ducksV2.push(birdV2);
+                birdV2.draw();
+            }
+            
+        }
 
         // Erstellen der Wolke
         cloud1 = new Cloud(150, 120, 200, 40);
@@ -53,10 +55,15 @@ namespace duckpond {
     function update(): void {
         // Bild wird neu gezeichnet, zuerst Hintergrund
         drawBackground();
-        // dann die Enten an der neuen Position
+        // dann die Enten im Teich an der neuen Position
         for (let duck of ducks) {
             duck.move(0.5);
             duck.draw();
+        }
+        // dann die Enten auf der Wiese an der neuen Position
+        for (let duckV2 of ducksV2) {
+            duckV2.move(0.2);
+            duckV2.draw();
         }
         // und dann die Wolken an der neuen Position
         for (let cloud of clouds) {
@@ -104,7 +111,7 @@ namespace duckpond {
     }
 
     // Funktion zum Zeichnen des Teiches
-    function drawPond():void {
+    function drawPond(): void {
         let pond: Path2D = new Path2D();
         crc2.beginPath();
         pond.moveTo(400, 610);
@@ -175,4 +182,23 @@ namespace duckpond {
         drawTree();
     }
 
+    // function doIt(): void {
+    //     let lineDort: Path2D = new Path2D();
+    //     crc2.beginPath();
+    //     lineDort.moveTo(0, 570);
+    //     lineDort.lineTo(350, 570);
+    //     lineDort.lineTo(350, 720);
+    //     crc2.strokeStyle = "rgb( 0, 0, 0)";
+    //     crc2.stroke(lineDort);
+    // }
+
+    // function doThat(): void {
+    //     let lineHier: Path2D = new Path2D();
+    //     crc2.beginPath();
+    //     lineHier.moveTo(830, 720);
+    //     lineHier.lineTo(830, 500);
+    //     lineHier.lineTo(1080, 500);
+    //     crc2.strokeStyle = "rgb( 0, 0, 0)";
+    //     crc2.stroke(lineHier);
+    // }
 }

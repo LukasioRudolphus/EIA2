@@ -3,11 +3,10 @@ var duckpond;
 (function (duckpond) {
     window.addEventListener("load", handleLoad);
     let ducks = [];
+    let ducksV2 = [];
     let clouds = [];
-    let bird1;
-    let bird2;
-    let bird3;
-    let bird4;
+    let bird;
+    let birdV2;
     let cloud1;
     let pCloud1;
     // Funktion zu Generierung von allem Notwendigem beim Laden des Fensters
@@ -19,19 +18,25 @@ var duckpond;
         duckpond.crc2 = canvasField.getContext("2d");
         // Zeichnen des Hintergrunds
         drawBackground();
-        // erstellen der Enten
-        bird1 = new duckpond.Duck(0, -5);
-        ducks.push(bird1);
-        bird1.draw();
-        bird2 = new duckpond.Duck(140, 10);
-        ducks.push(bird2);
-        bird2.draw();
-        bird3 = new duckpond.Duck(100, 90);
-        ducks.push(bird3);
-        bird3.draw();
-        bird4 = new duckpond.Duck(-40, 80);
-        ducks.push(bird4);
-        bird4.draw();
+        // erstellen der Enten im Teich
+        for (let i = 0; i < 10; i++) {
+            bird = new duckpond.Duck(50, 50);
+            ducks.push(bird);
+            bird.draw();
+        }
+        // erstellen der Enten auf der Wiese
+        for (let i = 0; i < 10; i++) {
+            if (i % 2 == 0) {
+                birdV2 = new duckpond.DuckV2(450, 150);
+                ducksV2.push(birdV2);
+                birdV2.draw();
+            }
+            else {
+                birdV2 = new duckpond.DuckV2(-410, 150);
+                ducksV2.push(birdV2);
+                birdV2.draw();
+            }
+        }
         // Erstellen der Wolke
         cloud1 = new duckpond.Cloud(150, 120, 200, 40);
         pCloud1 = cloud1.draw();
@@ -42,10 +47,15 @@ var duckpond;
     function update() {
         // Bild wird neu gezeichnet, zuerst Hintergrund
         drawBackground();
-        // dann die Enten an der neuen Position
+        // dann die Enten im Teich an der neuen Position
         for (let duck of ducks) {
             duck.move(0.5);
             duck.draw();
+        }
+        // dann die Enten auf der Wiese an der neuen Position
+        for (let duckV2 of ducksV2) {
+            duckV2.move(0.2);
+            duckV2.draw();
         }
         // und dann die Wolken an der neuen Position
         for (let cloud of clouds) {
@@ -153,5 +163,23 @@ var duckpond;
         drawPond();
         drawTree();
     }
+    // function doIt(): void {
+    //     let lineDort: Path2D = new Path2D();
+    //     crc2.beginPath();
+    //     lineDort.moveTo(0, 570);
+    //     lineDort.lineTo(350, 570);
+    //     lineDort.lineTo(350, 720);
+    //     crc2.strokeStyle = "rgb( 0, 0, 0)";
+    //     crc2.stroke(lineDort);
+    // }
+    // function doThat(): void {
+    //     let lineHier: Path2D = new Path2D();
+    //     crc2.beginPath();
+    //     lineHier.moveTo(830, 720);
+    //     lineHier.lineTo(830, 500);
+    //     lineHier.lineTo(1080, 500);
+    //     crc2.strokeStyle = "rgb( 0, 0, 0)";
+    //     crc2.stroke(lineHier);
+    // }
 })(duckpond || (duckpond = {}));
 //# sourceMappingURL=duckpond.js.map
