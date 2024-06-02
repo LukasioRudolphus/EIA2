@@ -3,10 +3,8 @@ namespace duckpond {
 
     export let crc2: CanvasRenderingContext2D;
 
-    let ducks: Duck[] = [];
-    let ducksWithLegs: Duck[] = [];
+    let moves: Moveable[] = [];
     let clouds: Cloud[] = [];
-    let insects: Insect[] = [];
     let bird: Duck;
     let cloud1: Cloud;
     let picCloud1: ImageData;
@@ -28,16 +26,16 @@ namespace duckpond {
             if (i % 3 == 0) {
                 // im Teich
                 bird = new Duck(50, 50, false);
-                ducks.push(bird);
+                moves.push(bird);
                 bird.draw();
             } else if (i % 2 == 0) {
                 // auf der Wiese
                 bird = new Duck(450, 150, true);
-                ducksWithLegs.push(bird);
+                moves.push(bird);
                 bird.draw();
             } else {
                 bird = new Duck(-410, 150, true);
-                ducksWithLegs.push(bird);
+                moves.push(bird);
                 bird.draw();
             }
             
@@ -51,7 +49,7 @@ namespace duckpond {
         for (let i = 0; i < 15; i++) {
             insecT = new Insect((Math.random() * 1080), (Math.random() * 720));
             insecT.draw();
-            insects.push(insecT);    
+            moves.push(insecT);
         }
 
 
@@ -60,27 +58,27 @@ namespace duckpond {
     }
 
     function update(): void {
-        // Bild wird neu gezeichnet, zuerst Hintergrund
+        // Bild wird neu gezeichnet, zuerst der Hintergrund
         drawBackground();
-        // dann die Enten im Teich an der neuen Position
-        for (let duck of ducks) {
-            duck.move(0.5);
-            duck.draw();
-        }
-        // dann die Enten auf der Wiese
-        for (let duckWithLegs of ducksWithLegs) {
-            duckWithLegs.move(0.2);
-            duckWithLegs.draw();
-        }
-        // dann die Wolken
+        // dann die Wolken,
         for (let cloud of clouds) {
             let cloudPos = cloud.move(0.3);
             crc2.putImageData(picCloud1, cloudPos.x - 150, 30);
         }
-        // und dann die Insekten
-        for (let insect of insects) {
-            insect.move(10);
-            insect.draw();
+
+        for (let moveable of moves) {
+            // dann die Insekten
+            if (moveable instanceof Insect)
+                moveable.move(10);
+            // und dann die Enten
+            if (moveable instanceof Duck){
+                if (moveable.hasLegs() == false) {
+                    moveable.move(0.5);
+                } else {
+                    moveable.move(0.2);
+                }
+            } 
+            moveable.draw();
         }
 
     }

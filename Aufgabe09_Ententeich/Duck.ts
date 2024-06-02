@@ -49,6 +49,10 @@ namespace duckpond {
             this.position.add(offset);
         }
 
+        hasLegs(): boolean {
+            return this.legs;
+        }
+
         // Zeichnen der Enten
         draw (): void {
             crc2.save();

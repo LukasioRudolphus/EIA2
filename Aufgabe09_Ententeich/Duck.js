@@ -48,6 +48,9 @@ var duckpond;
             }
             this.position.add(offset);
         }
+        hasLegs() {
+            return this.legs;
+        }
         // Zeichnen der Enten
         draw() {
             duckpond.crc2.save();

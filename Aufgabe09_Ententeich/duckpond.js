@@ -2,10 +2,8 @@
 var duckpond;
 (function (duckpond) {
     window.addEventListener("load", handleLoad);
-    let ducks = [];
-    let ducksWithLegs = [];
+    let moves = [];
     let clouds = [];
-    let insects = [];
     let bird;
     let cloud1;
     let picCloud1;
@@ -24,18 +22,18 @@ var duckpond;
             if (i % 3 == 0) {
                 // im Teich
                 bird = new duckpond.Duck(50, 50, false);
-                ducks.push(bird);
+                moves.push(bird);
                 bird.draw();
             }
             else if (i % 2 == 0) {
                 // auf der Wiese
                 bird = new duckpond.Duck(450, 150, true);
-                ducksWithLegs.push(bird);
+                moves.push(bird);
                 bird.draw();
             }
             else {
                 bird = new duckpond.Duck(-410, 150, true);
-                ducksWithLegs.push(bird);
+                moves.push(bird);
                 bird.draw();
             }
         }
@@ -46,33 +44,33 @@ var duckpond;
         for (let i = 0; i < 15; i++) {
             insecT = new duckpond.Insect((Math.random() * 1080), (Math.random() * 720));
             insecT.draw();
-            insects.push(insecT);
+            moves.push(insecT);
         }
         // Funktion, die in einem regelmäßigen Intervall aufgerufen wird, um im Bild Bewegung zu simulieren
         window.setInterval(update, 20);
     }
     function update() {
-        // Bild wird neu gezeichnet, zuerst Hintergrund
+        // Bild wird neu gezeichnet, zuerst der Hintergrund
         drawBackground();
-        // dann die Enten im Teich an der neuen Position
-        for (let duck of ducks) {
-            duck.move(0.5);
-            duck.draw();
-        }
-        // dann die Enten auf der Wiese
-        for (let duckWithLegs of ducksWithLegs) {
-            duckWithLegs.move(0.2);
-            duckWithLegs.draw();
-        }
-        // dann die Wolken
+        // dann die Wolken,
         for (let cloud of clouds) {
             let cloudPos = cloud.move(0.3);
             duckpond.crc2.putImageData(picCloud1, cloudPos.x - 150, 30);
         }
-        // und dann die Insekten
-        for (let insect of insects) {
-            insect.move(10);
-            insect.draw();
+        for (let moveable of moves) {
+            // dann die Insekten
+            if (moveable instanceof duckpond.Insect)
+                moveable.move(10);
+            // und dann die Enten
+            if (moveable instanceof duckpond.Duck) {
+                if (moveable.hasLegs() == false) {
+                    moveable.move(0.5);
+                }
+                else {
+                    moveable.move(0.2);
+                }
+            }
+            moveable.draw();
         }
     }
     // Funktion zum Zeichnen der Hügel
