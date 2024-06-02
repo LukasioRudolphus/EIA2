@@ -4,13 +4,12 @@ namespace duckpond {
     export let crc2: CanvasRenderingContext2D;
 
     let ducks: Duck[] = [];
-    let ducksV2: DuckV2[] = [];
+    let ducksWithLegs: Duck[] = [];
     let clouds: Cloud[] = [];
     let insects: Insect[] = [];
     let bird: Duck;
-    let birdV2: DuckV2;
     let cloud1: Cloud;
-    let pCloud1: ImageData;
+    let picCloud1: ImageData;
     let insecT: Insect;
 
     // Funktion zu Generierung von allem Notwendigem beim Laden des Fensters
@@ -24,30 +23,29 @@ namespace duckpond {
         // Zeichnen des Hintergrunds
         drawBackground();
 
-        // erstellen der Enten im Teich
-        for (let i = 0; i < 10; i++) {
-            bird = new Duck(50, 50);
-            ducks.push(bird);
-            bird.draw();
-        }
-
-        // erstellen der Enten auf der Wiese
-        for (let i = 0; i < 10; i++) {
-            if (i % 2 == 0) {
-                birdV2 = new DuckV2(450, 150);
-                ducksV2.push(birdV2);
-                birdV2.draw();
+        // erstellen der Enten
+        for (let i = 0; i < 21; i++) {
+            if (i % 3 == 0) {
+                // im Teich
+                bird = new Duck(50, 50, false);
+                ducks.push(bird);
+                bird.draw();
+            } else if (i % 2 == 0) {
+                // auf der Wiese
+                bird = new Duck(450, 150, true);
+                ducksWithLegs.push(bird);
+                bird.draw();
             } else {
-                birdV2 = new DuckV2(-410, 150);
-                ducksV2.push(birdV2);
-                birdV2.draw();
+                bird = new Duck(-410, 150, true);
+                ducksWithLegs.push(bird);
+                bird.draw();
             }
             
         }
 
         // Erstellen der Wolke
         cloud1 = new Cloud(150, 120, 200, 40);
-        pCloud1 = cloud1.draw();
+        picCloud1 = cloud1.draw();
         clouds.push(cloud1);
 
         for (let i = 0; i < 15; i++) {
@@ -70,14 +68,14 @@ namespace duckpond {
             duck.draw();
         }
         // dann die Enten auf der Wiese an der neuen Position
-        for (let duckV2 of ducksV2) {
-            duckV2.move(0.2);
-            duckV2.draw();
+        for (let duckWithLegs of ducksWithLegs) {
+            duckWithLegs.move(0.2);
+            duckWithLegs.draw();
         }
         // und dann die Wolken an der neuen Position
         for (let cloud of clouds) {
             let cloudPos = cloud.move(0.3);
-            crc2.putImageData(pCloud1, cloudPos.x - 150, 30);
+            crc2.putImageData(picCloud1, cloudPos.x - 150, 30);
         }
         for (let insect of insects) {
             insect.move(10);
