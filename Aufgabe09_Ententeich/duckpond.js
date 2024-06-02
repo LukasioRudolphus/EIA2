@@ -5,10 +5,12 @@ var duckpond;
     let ducks = [];
     let ducksV2 = [];
     let clouds = [];
+    let insects = [];
     let bird;
     let birdV2;
     let cloud1;
     let pCloud1;
+    let insecT;
     // Funktion zu Generierung von allem Notwendigem beim Laden des Fensters
     function handleLoad(_event) {
         let canvasField = document.querySelector("canvas");
@@ -41,6 +43,11 @@ var duckpond;
         cloud1 = new duckpond.Cloud(150, 120, 200, 40);
         pCloud1 = cloud1.draw();
         clouds.push(cloud1);
+        for (let i = 0; i < 15; i++) {
+            insecT = new duckpond.Insect((Math.random() * 1080), (Math.random() * 720));
+            insecT.draw();
+            insects.push(insecT);
+        }
         // Funktion, die in einem regelmäßigen Intervall aufgerufen wird, um im Bild Bewegung zu simulieren
         window.setInterval(update, 20);
     }
@@ -61,6 +68,10 @@ var duckpond;
         for (let cloud of clouds) {
             let cloudPos = cloud.move(0.3);
             duckpond.crc2.putImageData(pCloud1, cloudPos.x - 150, 30);
+        }
+        for (let insect of insects) {
+            insect.move(10);
+            insect.draw();
         }
     }
     // Funktion zum Zeichnen der Hügel

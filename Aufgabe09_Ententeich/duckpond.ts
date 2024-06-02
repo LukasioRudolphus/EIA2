@@ -6,10 +6,12 @@ namespace duckpond {
     let ducks: Duck[] = [];
     let ducksV2: DuckV2[] = [];
     let clouds: Cloud[] = [];
+    let insects: Insect[] = [];
     let bird: Duck;
     let birdV2: DuckV2;
     let cloud1: Cloud;
     let pCloud1: ImageData;
+    let insecT: Insect;
 
     // Funktion zu Generierung von allem Notwendigem beim Laden des Fensters
     function handleLoad(_event: Event): void {
@@ -48,6 +50,13 @@ namespace duckpond {
         pCloud1 = cloud1.draw();
         clouds.push(cloud1);
 
+        for (let i = 0; i < 15; i++) {
+            insecT = new Insect((Math.random() * 1080), (Math.random() * 720));
+            insecT.draw();
+            insects.push(insecT);    
+        }
+
+
         // Funktion, die in einem regelmäßigen Intervall aufgerufen wird, um im Bild Bewegung zu simulieren
         window.setInterval(update, 20);
     }
@@ -69,6 +78,10 @@ namespace duckpond {
         for (let cloud of clouds) {
             let cloudPos = cloud.move(0.3);
             crc2.putImageData(pCloud1, cloudPos.x - 150, 30);
+        }
+        for (let insect of insects) {
+            insect.move(10);
+            insect.draw();
         }
 
     }
