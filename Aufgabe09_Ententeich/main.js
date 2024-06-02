@@ -300,16 +300,17 @@ var duckpond;
             duck.move(0.5);
             duck.draw();
         }
-        // dann die Enten auf der Wiese an der neuen Position
+        // dann die Enten auf der Wiese
         for (let duckWithLegs of ducksWithLegs) {
             duckWithLegs.move(0.2);
             duckWithLegs.draw();
         }
-        // und dann die Wolken an der neuen Position
+        // dann die Wolken
         for (let cloud of clouds) {
             let cloudPos = cloud.move(0.3);
             duckpond.crc2.putImageData(picCloud1, cloudPos.x - 150, 30);
         }
+        // und dann die Insekten
         for (let insect of insects) {
             insect.move(10);
             insect.draw();
