@@ -1,18 +1,17 @@
-namespace duckpond {
-    export class Duck extends Moveable {
-        legs: boolean;
-
+"use strict";
+var duckpond;
+(function (duckpond) {
+    class Duck extends duckpond.Moveable {
+        legs;
         // Zuweisen der Eigenschaften zum Objekt bei der Erstellung dessen
-        constructor(_x: number, _y: number, _legs: boolean) {
+        constructor(_x, _y, _legs) {
             super(_x, _y);
             this.speed.random(10, 20);
             this.legs = _legs;
         }
-
         // Methode zum Bewegen der Enten
-        move(_timeslice: number): void {
-            let offset: Vector = super.move(_timeslice);
-
+        move(_timeslice) {
+            let offset = super.move(_timeslice);
             if (this.legs == false) {
                 // damit die Enten nicht aus dem Teich herausschwimmen
                 if (this.position.x < -70 || this.position.x > 205) {
@@ -22,7 +21,7 @@ namespace duckpond {
                 if (this.position.y < -10 || this.position.y > 115) {
                     offset.scale(-1);
                     this.speed.y *= -1;
-                }   
+                }
             }
             if (this.legs == true) {
                 // damit die Enten auf der Wiese bleiben
@@ -34,8 +33,9 @@ namespace duckpond {
                     if (this.position.y < 20 || this.position.y > 209) {
                         offset.scale(-1);
                         this.speed.y *= -1;
-                    } 
-                } else if (this.position.x <= -100){
+                    }
+                }
+                else if (this.position.x <= -100) {
                     if (this.position.x < -496 || this.position.x > -180) {
                         offset.scale(-1);
                         this.speed.x *= -1;
@@ -48,15 +48,13 @@ namespace duckpond {
             }
             this.position.add(offset);
         }
-
         // Zeichnen der Enten
-        draw (): void {
-            crc2.save();
-            crc2.translate(this.position.x, this.position.y);
-
+        draw() {
+            duckpond.crc2.save();
+            duckpond.crc2.translate(this.position.x, this.position.y);
             // Torso
-            crc2.beginPath();
-            let duckBody: Path2D = new Path2D();
+            duckpond.crc2.beginPath();
+            let duckBody = new Path2D();
             duckBody.moveTo(515, 500);
             duckBody.bezierCurveTo(510, 498, 505, 498, 500, 500);
             duckBody.bezierCurveTo(499, 499, 498, 498, 499, 497);
@@ -65,49 +63,46 @@ namespace duckpond {
             duckBody.bezierCurveTo(518.5, 498, 518.5, 496, 518, 494);
             duckBody.lineTo(515, 494);
             duckBody.bezierCurveTo(516, 496, 516, 496, 515, 500);
-            crc2.strokeStyle = "rgb( 0, 0, 0)";
-            crc2.stroke(duckBody);
-            crc2.fillStyle = "rgb( 0, 0, 0)";
-            crc2.fill(duckBody);
-        
+            duckpond.crc2.strokeStyle = "rgb( 0, 0, 0)";
+            duckpond.crc2.stroke(duckBody);
+            duckpond.crc2.fillStyle = "rgb( 0, 0, 0)";
+            duckpond.crc2.fill(duckBody);
             // Kopf
-            crc2.beginPath();
-            let duckHead: Path2D = new Path2D();
+            duckpond.crc2.beginPath();
+            let duckHead = new Path2D();
             duckHead.arc(518, 494, 2.5, 0, 360);
             duckHead.moveTo(515, 494);
-            crc2.strokeStyle = "rgb( 0, 0, 0)";
-            crc2.stroke(duckHead);
-            crc2.fillStyle = "rgb( 0, 0, 0)";
-            crc2.fill(duckHead);
-        
+            duckpond.crc2.strokeStyle = "rgb( 0, 0, 0)";
+            duckpond.crc2.stroke(duckHead);
+            duckpond.crc2.fillStyle = "rgb( 0, 0, 0)";
+            duckpond.crc2.fill(duckHead);
             // Schnabel
-            crc2.beginPath();
-            let duckBeak: Path2D = new Path2D();
+            duckpond.crc2.beginPath();
+            let duckBeak = new Path2D();
             duckBeak.moveTo(520, 493);
             duckBeak.bezierCurveTo(521, 495, 521, 495, 523, 494);
-            crc2.strokeStyle = "rgb( 0, 0, 0)";
-            crc2.stroke(duckBeak);
-            crc2.fillStyle = "rgb( 0, 0, 0)";
-            crc2.fill(duckBeak);
-
+            duckpond.crc2.strokeStyle = "rgb( 0, 0, 0)";
+            duckpond.crc2.stroke(duckBeak);
+            duckpond.crc2.fillStyle = "rgb( 0, 0, 0)";
+            duckpond.crc2.fill(duckBeak);
             if (this.legs == true) {
                 // Beine (wenn sie welche haben)
-                crc2.beginPath();
-                let duckLegs: Path2D = new Path2D();
+                duckpond.crc2.beginPath();
+                let duckLegs = new Path2D();
                 duckLegs.moveTo(507, 507);
                 duckLegs.lineTo(507, 510);
                 duckLegs.moveTo(510, 507);
                 duckLegs.lineTo(510, 510);
                 duckLegs.moveTo(505, 510);
                 duckLegs.lineTo(513, 510);
-                crc2.strokeStyle = "rgb( 0, 0, 0)";
-                crc2.stroke(duckLegs);
-                crc2.fillStyle = "rgb( 0, 0, 0)";
-                crc2.fill(duckLegs);
+                duckpond.crc2.strokeStyle = "rgb( 0, 0, 0)";
+                duckpond.crc2.stroke(duckLegs);
+                duckpond.crc2.fillStyle = "rgb( 0, 0, 0)";
+                duckpond.crc2.fill(duckLegs);
             }
-
-            crc2.restore();
+            duckpond.crc2.restore();
         }
-        
     }
-}
+    duckpond.Duck = Duck;
+})(duckpond || (duckpond = {}));
+//# sourceMappingURL=Duck.js.map

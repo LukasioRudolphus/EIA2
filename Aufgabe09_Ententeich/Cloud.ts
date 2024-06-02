@@ -1,12 +1,10 @@
 namespace duckpond {
-    export class Cloud {
-        position: Vector;
+    export class Cloud extends Moveable {
         size: Vector;
-        speed: Vector;
 
         // Zuweisen der Eigenschaften zum Objekt bei der Erstellung dessen
         constructor(_x: number, _y: number, _xS: number, _yS: number) {
-            this.position = new Vector(_x, _y);
+            super(_x, _y);
             this.size = new Vector(_xS, _yS);
             this.speed = new Vector(4, 0);
         }
@@ -18,7 +16,6 @@ namespace duckpond {
             if (this.position.x > (crc2.canvas.width + 150)) {
                 this.position.x -= (crc2.canvas.width + 300);
             }
-
             offset.scale(_timeslice);
             this.position.add(offset);
             // notwendig, um putImageData richtig zu positionieren

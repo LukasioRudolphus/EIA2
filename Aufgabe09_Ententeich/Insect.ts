@@ -1,18 +1,15 @@
 namespace duckpond {
-    export class Insect {
-        position: Vector;
-        speed: Vector;
+    export class Insect extends Moveable {
 
         constructor(_x: number, _y: number) {
-            this.position = new Vector(_x, _y);
-            this.speed = new Vector(0, 0);
+            super(_x, _y);
         }
 
         // Methode zum Bewegen der Insekten
         move(_timeslice: number): void {
             this.speed.random(10, 20);
+            let offset: Vector = super.move(_timeslice);
 
-            let offset: Vector = new Vector(this.speed.x, this.speed.y);
             // damit die Insekten beim herausfliegen auf einer Seite auf der anderen wieder reinkommen
             if (this.position.x > crc2.canvas.width) {
                 this.position.x -= crc2.canvas.width ;
@@ -26,8 +23,6 @@ namespace duckpond {
             if (this.position.y < 0) {
                 this.position.y += crc2.canvas.height;
             }
-
-            offset.scale(_timeslice);
             this.position.add(offset);
         }
 
