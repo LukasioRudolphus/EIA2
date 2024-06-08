@@ -72,7 +72,7 @@ namespace duckpond {
                 moveable.move(10);
             // und dann die Enten
             if (moveable instanceof Duck){
-                if (moveable.hasLegs() == false) {
+                if (moveable.legs == false) {
                     moveable.move(0.5);
                 } else {
                     moveable.move(0.2);

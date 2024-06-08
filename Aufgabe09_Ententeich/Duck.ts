@@ -1,6 +1,6 @@
 namespace duckpond {
     export class Duck extends Moveable {
-        legs: boolean;
+        public legs: boolean;
 
         // Zuweisen der Eigenschaften zum Objekt bei der Erstellung dessen
         constructor(_x: number, _y: number, _legs: boolean) {
