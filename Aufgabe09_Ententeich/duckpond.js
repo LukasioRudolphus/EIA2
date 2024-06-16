@@ -8,9 +8,14 @@ var duckpond;
     let cloud1;
     let picCloud1;
     let insecT;
+    let canvasField;
+    let clickPoint;
+    let duckCounter = 0;
+    let speedCloud = 0.3;
     // Funktion zu Generierung von allem Notwendigem beim Laden des Fensters
     function handleLoad(_event) {
-        let canvasField = document.querySelector("canvas");
+        canvasField = document.querySelector("canvas");
+        let birdButton = document.getElementById("moreBIRDS");
         if (!canvasField) {
             return;
         }
@@ -48,13 +53,63 @@ var duckpond;
         }
         // Funktion, die in einem regelmäßigen Intervall aufgerufen wird, um im Bild Bewegung zu simulieren
         window.setInterval(update, 20);
+        // Farbänderung der Enten auf Mausklick
+        canvasField.addEventListener("click", colorChange);
+        birdButton.addEventListener("click", addDuck);
+        document.addEventListener("keydown", changeSpeed);
+    }
+    function changeSpeed(_event) {
+        if (_event.key == "ArrowRight") {
+            speedCloud += 0.1;
+            console.log(speedCloud);
+        }
+        else if (_event.key == "ArrowLeft" && speedCloud >= 0.15) {
+            speedCloud -= 0.1;
+            console.log(speedCloud);
+        }
+    }
+    function addDuck() {
+        duckCounter++;
+        if (duckCounter % 3 == 0) {
+            // im Teich
+            bird = new duckpond.Duck(50, 50, false);
+            moves.push(bird);
+            bird.draw();
+        }
+        else if (duckCounter % 2 == 0) {
+            // auf der Wiese
+            bird = new duckpond.Duck(450, 150, true);
+            moves.push(bird);
+            bird.draw();
+        }
+        else {
+            bird = new duckpond.Duck(-410, 150, true);
+            moves.push(bird);
+            bird.draw();
+        }
+    }
+    function colorChange(_event) {
+        let rect = canvasField.getBoundingClientRect();
+        // speichern des Klickpunktes
+        clickPoint = new duckpond.Vector(_event.clientX - rect.left, _event.clientY - rect.top);
+        for (let moveable of moves) {
+            // Enten angeklickt?
+            if (moveable instanceof duckpond.Duck) {
+                if (moveable.legs == false) {
+                    moveable.clickBox(clickPoint);
+                }
+                else {
+                    moveable.clickBox(clickPoint);
+                }
+            }
+        }
     }
     function update() {
         // Bild wird neu gezeichnet, zuerst der Hintergrund
         drawBackground();
         // dann die Wolken,
         for (let cloud of clouds) {
-            let cloudPos = cloud.move(0.3);
+            let cloudPos = cloud.move(speedCloud);
             duckpond.crc2.putImageData(picCloud1, cloudPos.x - 150, 30);
         }
         for (let moveable of moves) {

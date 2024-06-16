@@ -3,11 +3,13 @@ var duckpond;
 (function (duckpond) {
     class Duck extends duckpond.Moveable {
         legs;
+        color;
         // Zuweisen der Eigenschaften zum Objekt bei der Erstellung dessen
         constructor(_x, _y, _legs) {
             super(_x, _y);
             this.speed.random(10, 20);
             this.legs = _legs;
+            this.color = "rgb( 0, 0, 0)";
         }
         // Methode zum Bewegen der Enten
         move(_timeslice) {
@@ -48,8 +50,21 @@ var duckpond;
             }
             this.position.add(offset);
         }
-        hasLegs() {
-            return this.legs;
+        clickBox(_clickPoint) {
+            if (this.legs == false) {
+                // schauen, ob der click die HitBox der Ente getroffen hat (ohne Beine)
+                if ((_clickPoint.x >= 497 + this.position.x && _clickPoint.x <= 523 + this.position.x) && (_clickPoint.y >= 491 + this.position.y && _clickPoint.y <= 507 + this.position.y)) {
+                    // Ente bekommt eine zufällige Farbe
+                    this.color = "rgb( " + Math.random() * 256 + ", " + Math.random() * 256 + ", " + Math.random() * 256 + ")";
+                }
+            }
+            else {
+                // schauen, ob der click die HitBox der Ente getroffen hat (mit Beinen)
+                if ((_clickPoint.x >= 497 + this.position.x && _clickPoint.x <= 523 + this.position.x) && (_clickPoint.y >= 491 + this.position.y && _clickPoint.y <= 510 + this.position.y)) {
+                    // Ente bekommt eine zufällige Farbe
+                    this.color = "rgb( " + Math.random() * 256 + ", " + Math.random() * 256 + ", " + Math.random() * 256 + ")";
+                }
+            }
         }
         // Zeichnen der Enten
         draw() {
@@ -66,27 +81,27 @@ var duckpond;
             duckBody.bezierCurveTo(518.5, 498, 518.5, 496, 518, 494);
             duckBody.lineTo(515, 494);
             duckBody.bezierCurveTo(516, 496, 516, 496, 515, 500);
-            duckpond.crc2.strokeStyle = "rgb( 0, 0, 0)";
+            duckpond.crc2.strokeStyle = this.color;
             duckpond.crc2.stroke(duckBody);
-            duckpond.crc2.fillStyle = "rgb( 0, 0, 0)";
+            duckpond.crc2.fillStyle = this.color;
             duckpond.crc2.fill(duckBody);
             // Kopf
             duckpond.crc2.beginPath();
             let duckHead = new Path2D();
             duckHead.arc(518, 494, 2.5, 0, 360);
             duckHead.moveTo(515, 494);
-            duckpond.crc2.strokeStyle = "rgb( 0, 0, 0)";
+            duckpond.crc2.strokeStyle = this.color;
             duckpond.crc2.stroke(duckHead);
-            duckpond.crc2.fillStyle = "rgb( 0, 0, 0)";
+            duckpond.crc2.fillStyle = this.color;
             duckpond.crc2.fill(duckHead);
             // Schnabel
             duckpond.crc2.beginPath();
             let duckBeak = new Path2D();
             duckBeak.moveTo(520, 493);
             duckBeak.bezierCurveTo(521, 495, 521, 495, 523, 494);
-            duckpond.crc2.strokeStyle = "rgb( 0, 0, 0)";
+            duckpond.crc2.strokeStyle = this.color;
             duckpond.crc2.stroke(duckBeak);
-            duckpond.crc2.fillStyle = "rgb( 0, 0, 0)";
+            duckpond.crc2.fillStyle = this.color;
             duckpond.crc2.fill(duckBeak);
             if (this.legs == true) {
                 // Beine (wenn sie welche haben)
@@ -98,9 +113,9 @@ var duckpond;
                 duckLegs.lineTo(510, 510);
                 duckLegs.moveTo(505, 510);
                 duckLegs.lineTo(513, 510);
-                duckpond.crc2.strokeStyle = "rgb( 0, 0, 0)";
+                duckpond.crc2.strokeStyle = this.color;
                 duckpond.crc2.stroke(duckLegs);
-                duckpond.crc2.fillStyle = "rgb( 0, 0, 0)";
+                duckpond.crc2.fillStyle = this.color;
                 duckpond.crc2.fill(duckLegs);
             }
             duckpond.crc2.restore();

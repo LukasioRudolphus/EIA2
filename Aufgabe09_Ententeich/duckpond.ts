@@ -9,10 +9,15 @@ namespace duckpond {
     let cloud1: Cloud;
     let picCloud1: ImageData;
     let insecT: Insect;
+    let canvasField: HTMLCanvasElement;
+    let clickPoint: Vector;
+    let duckCounter: number = 0;
+    let speedCloud: number = 0.3;
 
     // Funktion zu Generierung von allem Notwendigem beim Laden des Fensters
     function handleLoad(_event: Event): void {
-        let canvasField: HTMLCanvasElement = document.querySelector("canvas")!;
+        canvasField = document.querySelector("canvas")!;
+        let birdButton = document.getElementById("moreBIRDS")!;
         if(!canvasField){
             return
         }
@@ -52,9 +57,58 @@ namespace duckpond {
             moves.push(insecT);
         }
 
-
         // Funktion, die in einem regelmäßigen Intervall aufgerufen wird, um im Bild Bewegung zu simulieren
         window.setInterval(update, 20);
+
+        // Farbänderung der Enten auf Mausklick
+        canvasField.addEventListener("click", colorChange);
+        birdButton.addEventListener("click", addDuck);
+        document.addEventListener("keydown", changeSpeed);
+    }
+
+    function changeSpeed(_event: KeyboardEvent): void {
+        if (_event.key == "ArrowRight") {
+            speedCloud += 0.1;
+            console.log(speedCloud);
+        } else if (_event.key == "ArrowLeft" && speedCloud >= 0.15) {
+            speedCloud -= 0.1;
+            console.log(speedCloud);
+        }
+    }
+
+    function addDuck(): void {
+        duckCounter++;
+        if (duckCounter % 3 == 0) {
+            // im Teich
+            bird = new Duck(50, 50, false);
+            moves.push(bird);
+            bird.draw();
+        } else if (duckCounter % 2 == 0) {
+            // auf der Wiese
+            bird = new Duck(450, 150, true);
+            moves.push(bird);
+            bird.draw();
+        } else {
+            bird = new Duck(-410, 150, true);
+            moves.push(bird);
+            bird.draw();
+        }
+    }
+
+    function colorChange(_event: MouseEvent): void {
+        let rect = canvasField.getBoundingClientRect();
+        // speichern des Klickpunktes
+        clickPoint = new Vector (_event.clientX - rect.left, _event.clientY - rect.top);
+        for (let moveable of moves) {
+            // Enten angeklickt?
+            if (moveable instanceof Duck){
+                if (moveable.legs == false) {
+                    moveable.clickBox(clickPoint);
+                } else {
+                    moveable.clickBox(clickPoint);
+                }
+            }
+        }
     }
 
     function update(): void {
@@ -62,7 +116,7 @@ namespace duckpond {
         drawBackground();
         // dann die Wolken,
         for (let cloud of clouds) {
-            let cloudPos = cloud.move(0.3);
+            let cloudPos = cloud.move(speedCloud);
             crc2.putImageData(picCloud1, cloudPos.x - 150, 30);
         }
 

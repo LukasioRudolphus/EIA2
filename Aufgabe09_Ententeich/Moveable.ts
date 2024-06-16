@@ -17,5 +17,9 @@ namespace duckpond {
         draw(): any {
             // Hier könnte Ihre Methode stehen
         }
+
+        // drawClickBox(): any {
+        //     // Hier könnte Ihre Methode stehen
+        // }
     }
 }
