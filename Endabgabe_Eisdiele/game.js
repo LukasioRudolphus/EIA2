@@ -25,7 +25,7 @@ var icecream;
         aCustomer.draw();
         platzZuweisung(aCustomer);
         // console.log(allChairs);
-        // window.setInterval(update, 20);
+        window.setInterval(update, 20);
     }
     function update() {
         count++;

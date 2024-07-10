@@ -31,7 +31,7 @@ namespace icecream {
 
         // console.log(allChairs);
 
-        // window.setInterval(update, 20);
+        window.setInterval(update, 20);
     }
 
     function update(): void {
