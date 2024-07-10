@@ -4,6 +4,7 @@ var duckpond;
     window.addEventListener("load", handleLoad);
     let moves = [];
     let clouds = [];
+    let foods = [];
     let bird;
     let cloud1;
     let picCloud1;
@@ -12,6 +13,7 @@ var duckpond;
     let clickPoint;
     let duckCounter = 0;
     let speedCloud = 0.3;
+    let duckFood;
     // Funktion zu Generierung von allem Notwendigem beim Laden des Fensters
     function handleLoad(_event) {
         canvasField = document.querySelector("canvas");
@@ -57,6 +59,7 @@ var duckpond;
         canvasField.addEventListener("click", colorChange);
         birdButton.addEventListener("click", addDuck);
         document.addEventListener("keydown", changeSpeed);
+        doIt();
     }
     function changeSpeed(_event) {
         if (_event.key == "ArrowRight") {
@@ -90,6 +93,7 @@ var duckpond;
         let rect = canvasField.getBoundingClientRect();
         // speichern des Klickpunktes
         clickPoint = new duckpond.Vector(_event.clientX - rect.left, _event.clientY - rect.top);
+        duckFood = new duckpond.Food(clickPoint);
         for (let moveable of moves) {
             // Enten angeklickt?
             if (moveable instanceof duckpond.Duck) {
@@ -101,10 +105,18 @@ var duckpond;
                 }
             }
         }
+        // Teich 410 710 480 620
+        if ((clickPoint.x >= 410 && clickPoint.x <= 710) && (clickPoint.y >= 480 && clickPoint.y <= 610)) {
+            duckFood.draw();
+            foods.push(duckFood);
+        }
     }
     function update() {
         // Bild wird neu gezeichnet, zuerst der Hintergrund
         drawBackground();
+        for (let food of foods) {
+            food.draw();
+        }
         // dann die Wolken,
         for (let cloud of clouds) {
             let cloudPos = cloud.move(speedCloud);
@@ -226,15 +238,18 @@ var duckpond;
         drawPond();
         drawTree();
     }
-    // function doIt(): void {
-    //     let lineDort: Path2D = new Path2D();
-    //     crc2.beginPath();
-    //     lineDort.moveTo(0, 570);
-    //     lineDort.lineTo(350, 570);
-    //     lineDort.lineTo(350, 720);
-    //     crc2.strokeStyle = "rgb( 0, 0, 0)";
-    //     crc2.stroke(lineDort);
-    // }
+    // Teich 410 710 480 620
+    function doIt() {
+        let lineDort = new Path2D();
+        duckpond.crc2.beginPath();
+        lineDort.moveTo(410, 480);
+        lineDort.lineTo(410, 620);
+        lineDort.lineTo(710, 620);
+        lineDort.lineTo(710, 480);
+        lineDort.lineTo(410, 480);
+        duckpond.crc2.strokeStyle = "rgb( 0, 0, 0)";
+        duckpond.crc2.stroke(lineDort);
+    }
     // function doThat(): void {
     //     let lineHier: Path2D = new Path2D();
     //     crc2.beginPath();
