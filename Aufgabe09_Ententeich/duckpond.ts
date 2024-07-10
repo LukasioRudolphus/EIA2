@@ -69,10 +69,8 @@ namespace duckpond {
     function changeSpeed(_event: KeyboardEvent): void {
         if (_event.key == "ArrowRight") {
             speedCloud += 0.1;
-            console.log(speedCloud);
         } else if (_event.key == "ArrowLeft" && speedCloud >= 0.15) {
             speedCloud -= 0.1;
-            console.log(speedCloud);
         }
     }
 
